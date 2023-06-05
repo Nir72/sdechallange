@@ -1,0 +1,98 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution 
+{
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation) 
+	{
+		// Write your code here.
+		  ArrayList<Integer> ary=new ArrayList<>();
+
+        int index1=-1;
+
+        int index2=-1;
+
+        int n=permutation.size();
+
+        for(int i=n-2;i>=0;i--){
+
+            if(permutation.get(i)<permutation.get(i+1)){
+
+                index1=i;
+
+                break;
+
+            }
+
+        }
+
+        if(index1==-1){
+
+            reverse(permutation, 0, n-1);
+
+            for(int i=0;i<permutation.size();i++){
+
+            ary.add(permutation.get(i));
+
+        }
+
+        return ary;
+
+        } else {
+
+            for(int i=n-1;i>=0;i--){
+
+                if(permutation.get(i)>permutation.get(index1)){
+
+                    index2=i;
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+        swap(permutation, index1, index2);
+
+        reverse(permutation, index1+1, n-1);
+
+        for(int i=0;i<permutation.size();i++){
+
+            ary.add(permutation.get(i));
+
+        }
+
+        return ary;
+
+    }
+
+    public static void swap(ArrayList<Integer> permutation,int i,int j){
+
+        int temp=permutation.get(i);
+
+        permutation.set(i,permutation.get(j));
+
+        permutation.set(j,temp);
+
+    }
+
+    public static void reverse(ArrayList<Integer> permutation,int i,int j){
+
+        while(i<j){
+
+            swap(permutation,i,j);
+
+            i++;
+
+            j--;
+
+        }
+
+        
+		
+	}
+}
